@@ -8,6 +8,7 @@ using Artesanas.Models;
 
 namespace Artesanas.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         public IActionResult Index()
