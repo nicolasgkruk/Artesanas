@@ -70,7 +70,7 @@ namespace Artesanas
             {
                 routes.MapRoute(
                     name: "areas",
-                    template: "{area=Customer}{controller=Home}/{action=Index}/{id?}");
+                    template: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
