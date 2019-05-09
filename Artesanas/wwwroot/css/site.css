@@ -1,6 +1,22 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    font-family: inherit;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -9,9 +25,7 @@ a.navbar-brand {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -44,6 +58,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  min-height: 80vh;
 }
 .footer {
   position: absolute;
@@ -53,4 +68,31 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.search-background {
+background:url("../img/bg.png");
+}
+
+.backgroundWhite {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+}
+
+.backgroundWhiteBorder {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    border: 1rem solid #ddd;
+}
+
+.backgroundWhiteBorderOneRemPadding {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    border: 1rem solid #ddd;
 }
