@@ -1,0 +1,16 @@
+﻿@model Tipo
+@{
+    ViewData["Title"] = "Agregar tipo de cerveza";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Agregar tipo de cerveza</h2>
+<br />
+
+<form asp-action="Create" method="post">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</form>
+

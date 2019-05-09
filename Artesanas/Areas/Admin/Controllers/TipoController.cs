@@ -22,5 +22,10 @@ namespace Artesanas.Areas.Admin.Controllers
         {
              return  View(await _db.Tipo.ToListAsync());
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
