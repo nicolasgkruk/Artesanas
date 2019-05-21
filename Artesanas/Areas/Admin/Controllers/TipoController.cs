@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Artesanas.Data;
+using Artesanas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +24,28 @@ namespace Artesanas.Areas.Admin.Controllers
              return  View(await _db.Tipo.ToListAsync());
         }
 
+        //GET - CREATE
         public IActionResult Create()
         {
             return View();
+        }
+
+
+        //POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Tipo tipo)
+        {
+            if(ModelState.IsValid)
+            {
+                //if valid
+                _db.Tipo.Add(tipo);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(tipo);
         }
     }
 }

@@ -31,8 +31,8 @@
                   <tr>
                       <td>
                           @Html.DisplayFor(model => tipo.Name);
-                      </td>
-                      <td> Editar | Eliminar | Detalles </td>
+                      </td>                    
+                      <partial name="_TableButtonPartial" model="tipo.Id" />
                   </tr>
               }
           </table>
