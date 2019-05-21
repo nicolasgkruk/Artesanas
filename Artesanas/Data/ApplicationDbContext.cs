@@ -15,5 +15,7 @@ namespace Artesanas.Data
         }
 
         public DbSet<Tipo> Tipo { get; set; }
+        public DbSet<SubTipo> SubTipo { get; set; }
+
     }
 }
