@@ -20,7 +20,7 @@ namespace Artesanas.Models
         [Display(Name = "Tipo de cerveza")]
         public int TipoId { get; set; }
 
-        [ForeignKey("CategoryId")]
+        [ForeignKey("TipoId")]
         public virtual Tipo Tipo { get; set; }
     }
 }
