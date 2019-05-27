@@ -16,6 +16,8 @@ namespace Artesanas.Data
 
         public DbSet<Tipo> Tipo { get; set; }
         public DbSet<SubTipo> SubTipo { get; set; }
-
+        public DbSet<Maker> Maker { get; set; }
+        public DbSet<StoreItem> StoreItem { get; set; }
+ 
     }
 }
