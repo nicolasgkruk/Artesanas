@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tipo>
+﻿@model IEnumerable<Maker>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,13 +26,13 @@
                   </th>
                   <th></th>
               </tr>
-              @foreach (var tipo in Model)
+              @foreach (var maker in Model)
               {
                   <tr>
                       <td>
-                          @Html.DisplayFor(model => tipo.Name)
+                          @Html.DisplayFor(model => maker.Name)
                       </td>                    
-                      <partial name="_TableButtonPartial" model="tipo.Id" />
+                      <partial name="_TableButtonPartial" model="maker.Id" />
                   </tr>
               }
           </table>
