@@ -23,10 +23,10 @@ namespace Artesanas.Models
         public int Gravity { get; set; }
 
         public float Alcohol { get; set; }
+        public string Bitterness { get; set; }
         public enum EBitterness { NA = 0, Bajo = 1, Moderado = 2, MedioAmargor = 3, Alto = 4 }
 
         public float Amount { get; set; }
-
         public string Image { get; set; }
 
         [Display(Name = "Tipo")]
