@@ -31,13 +31,18 @@ namespace Artesanas.Areas.Admin.Controllers
             StoreItemVM = new StoreItemViewModel()
             {
                 Tipo = _db.Tipo,
-                StoreItem = new Models.StoreItem()
+                Maker = _db.Maker,
+                StoreItem = new StoreItem()
             };
         }
 
         public async Task<IActionResult> Index()
         {
-            var storeItems = await _db.StoreItem.Include(m => m.Tipo).Include(m => m.SubTipo).ToListAsync();
+            var storeItems = await _db.StoreItem
+                .Include(m => m.Tipo)
+                .Include(m => m.SubTipo)
+                .Include(m => m.Maker)
+                .ToListAsync();
             return View(storeItems);
         }
 

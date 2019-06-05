@@ -10,5 +10,6 @@ namespace Artesanas.Models.ViewModels
         public StoreItem StoreItem { get; set; }
         public IEnumerable<Tipo> Tipo { get; set; }
         public IEnumerable<SubTipo> SubTipo { get; set; }
+        public IEnumerable<Maker> Maker { get; set; }
     }
 }
