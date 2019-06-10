@@ -2,20 +2,20 @@
 @using Artesanas.Extensions
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
-<h2 class="text-info">Edit StoreItem</h2>
+<h2 class="text-info">Details StoreItem</h2>
 <br />
 
-<form method="post" asp-action="Edit" enctype="multipart/form-data">
-    <div class="border backgroundWhite">
-        <input type="hidden" asp-for="StoreItem.Id" />
+<div class="border backgroundWhite">
+    <input type="hidden" asp-for="StoreItem.Id" />
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+    <fieldset disabled>
 
         <div class="form-group row">
             <div class="col-2">
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-
+        </fieldset>
 
 
         @{
@@ -152,86 +152,30 @@
                 <div id="imagenActual" class="row">
                     <img src="@Model.StoreItem.Image" style="border-radius:5px;border: 1px solid #bbb9b9; width: 20%; height:20%" />
                 </div>
-                <div class="row">
-                <button id="cambiarImagen" class="btn btn-sm btn-danger">Eliminar esta imagen</button>
-                </div>
-
-                <div class="form-group row" id="agregarImagen" style="display:none;">
-                    <div class="col-2">
-                        <label asp-for="StoreItem.Image" class="col-form-label"></label>
-                    </div>
-                    <div class="col-5">
-                        <input name="files" data-max-size="4194304" type="file" accept="image/png, image/jpeg" asp-for="StoreItem.Image" class="form-control" value="@Model.StoreItem.Image" />
-                    </div>
-                    <span asp-validation-for="StoreItem.Image" class="text-danger"></span>
-                </div>
-            }
-            else
-            {
-                <div class="form-group row" id="agregarImagen">
-                    <div class="col-2">
-                        <label asp-for="StoreItem.Image" class="col-form-label"></label>
-                    </div>
-                    <div class="col-5">
-                        <input name="files" data-max-size="4194304" type="file" accept="image/png, image/jpeg" asp-for="StoreItem.Image" class="form-control" value="@Model.StoreItem.Image" />
-                    </div>
-
-                    <span asp-validation-for="StoreItem.Image" class="text-danger"></span>
-                </div>
-            };
-
+            }        
         }
 
 
         <div class="form-group row">
             <div class="col-5 offset-2">
-                <partial name="_EditAndBackToListButton" model="Model.StoreItem.Id" />
+                <partial name="_DetailsAndBackToListButton" model="Model.StoreItem.Id" />
             </div>
         </div>
 
 
-    </div>
-</form>
+</div>
 
 @section Scripts{
     <script>
         tinymce.init({
             selector: 'textarea',
             plugins: "lists",
-            menubar: 'file edit format'
-        });
-    </script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            getSubTipo();
-            $('#TipoId').change(function () {
-                getSubTipo();
-            });
-
-
-            $("#cambiarImagen").click(function (e) {
-                e.preventDefault();
-                $("#imagenActual").hide();
-                $("#agregarImagen").show();
-            });
-
-        });
-        function getSubTipo() {
-            var url = '@Url.Content("~/")' + "Admin/SubTipo/GetSubTipo";
-            var ddlsoruce = '#TipoId';
-            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
-                var items = '';
-                $('#SubTipoId').empty();
-                $.each(data, function (i, subcategory) {
-                    items += "<option value='" + subcategory.value + "'>" + subcategory.text + "</option>";
-                });
-                $('#SubTipoId').html(items);
-            })
-        }
-    </script>
-
+            toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+            menubar: 'file edit format',
+            readonly: 1
+        });</script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
 
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

@@ -88,7 +88,7 @@ namespace Artesanas.Areas.Admin.Controllers
             else
             {
                 //no file was uploaded, so use default
-                var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultFoodImage);
+                var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultImage);
                 System.IO.File.Copy(uploads, webRootPath + @"\images\" + StoreItemVM.StoreItem.Id + ".png");
                 storeItemFromDb.Image = @"\images\" + StoreItemVM.StoreItem.Id + ".png";
             }
@@ -147,11 +147,14 @@ namespace Artesanas.Areas.Admin.Controllers
                 var extension_new = Path.GetExtension(files[0].FileName);
 
                 //Delete the original file
-                var imagePath = Path.Combine(webRootPath, storeItemFromDb.Image.TrimStart('\\'));
-
-                if (System.IO.File.Exists(imagePath))
+                if (StoreItemVM.StoreItem.Image != null)
                 {
-                    System.IO.File.Delete(imagePath);
+                    var imagePath = Path.Combine(webRootPath, storeItemFromDb.Image.TrimStart('\\'));
+                
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
 
                 //we will upload the new file
@@ -172,7 +175,6 @@ namespace Artesanas.Areas.Admin.Controllers
             storeItemFromDb.Bitterness = StoreItemVM.StoreItem.Bitterness;
             storeItemFromDb.Amount = StoreItemVM.StoreItem.Amount;
             storeItemFromDb.Price = StoreItemVM.StoreItem.Price;
-            storeItemFromDb.Image = StoreItemVM.StoreItem.Image;
             storeItemFromDb.TipoId = StoreItemVM.StoreItem.TipoId;
             storeItemFromDb.MakerId = StoreItemVM.StoreItem.MakerId;
             storeItemFromDb.SubTipoId = StoreItemVM.StoreItem.SubTipoId;
@@ -191,6 +193,7 @@ namespace Artesanas.Areas.Admin.Controllers
             }
 
             StoreItemVM.StoreItem = await _db.StoreItem.Include(m => m.Tipo).Include(m => m.SubTipo).SingleOrDefaultAsync(m => m.Id == id);
+            StoreItemVM.SubTipo = await _db.SubTipo.Where(s => s.TipoId == StoreItemVM.StoreItem.TipoId).ToListAsync();
 
             if (StoreItemVM.StoreItem == null)
             {
@@ -209,6 +212,7 @@ namespace Artesanas.Areas.Admin.Controllers
             }
 
             StoreItemVM.StoreItem = await _db.StoreItem.Include(m => m.Tipo).Include(m => m.SubTipo).SingleOrDefaultAsync(m => m.Id == id);
+            StoreItemVM.SubTipo = await _db.SubTipo.Where(s => s.TipoId == StoreItemVM.StoreItem.TipoId).ToListAsync();
 
             if (StoreItemVM.StoreItem == null)
             {
@@ -228,12 +232,16 @@ namespace Artesanas.Areas.Admin.Controllers
 
             if (storeItem != null)
             {
-                var imagePath = Path.Combine(webRootPath, storeItem.Image.TrimStart('\\'));
-
-                if (System.IO.File.Exists(imagePath))
+                if (storeItem.Image != null)
                 {
-                    System.IO.File.Delete(imagePath);
+                    var imagePath = Path.Combine(webRootPath, storeItem.Image.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
+                
                 _db.StoreItem.Remove(storeItem);
                 await _db.SaveChangesAsync();
 

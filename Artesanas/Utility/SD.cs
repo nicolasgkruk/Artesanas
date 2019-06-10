@@ -8,7 +8,7 @@ namespace Artesanas.Utility
 {
     public static class SD
     {
-        public const string DefaultFoodImage = "default_food.png";
+        public const string DefaultImage = "default.png";
 
         public static string ConvertToRawHtml(string source)
         {
