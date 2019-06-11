@@ -5,15 +5,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Artesanas.Models;
+using Artesanas.Models.ViewModels;
+using Artesanas.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Artesanas.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+
+        private readonly ApplicationDbContext _db;
+
+        public HomeController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            IndexViewModel IndexVM = new IndexViewModel()
+            {
+                StoreItem = await _db.StoreItem.Include(m => m.Tipo).Include(m => m.SubTipo).ToListAsync(),
+                Tipo = await _db.Tipo.ToListAsync(),
+                Coupon = await _db.Coupon.Where(c => c.IsActive == true).ToListAsync()
+
+            };
+
+            return View(IndexVM);
         }
 
         public IActionResult Privacy()
