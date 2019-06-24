@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Artesanas.Data;
 using Artesanas.Models;
 
-namespace Spice.Areas.Admin.Controllers
+namespace Artesanas.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CouponController : Controller

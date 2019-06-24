@@ -1,4 +1,5 @@
 ﻿@page
+@using Artesanas.Utility
 @model RegisterModel
 
 
@@ -98,6 +99,20 @@
         </div>
 
       
+          @if (User.IsInRole(SD.ManagerUser))
+                {
+                    <div class="form-group row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-5">
+                            <input type="radio" name="rdUserRole" value="@SD.StorageUser" checked /> @SD.StorageUser
+                            <input type="radio" name="rdUserRole" value="@SD.FrontDeskUser" checked /> @SD.FrontDeskUser
+                            <input type="radio" name="rdUserRole" value="@SD.ManagerUser" checked /> @SD.ManagerUser
+                        </div>
+                    </div>
+                }
+
+        
 
         <div class="form-group row">
             <div class="col-5 offset-2">
